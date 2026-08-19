@@ -1,5 +1,7 @@
 # Unity Screenshot
 
+[English](README.md) | [한국어](README_KO.md)
+
 Capture the Unity Game view with **F12**, just like taking a screenshot on Steam.
 
 ## Features
