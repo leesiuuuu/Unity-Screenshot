@@ -49,4 +49,3 @@ To change F12, open **Edit > Shortcuts**, search for
 ## License
 
 [MIT](LICENSE.md)
-
