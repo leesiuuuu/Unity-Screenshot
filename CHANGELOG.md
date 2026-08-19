@@ -2,6 +2,12 @@
 
 All notable changes to this package will be documented in this file.
 
+## [0.2.1] - 2026-08-19
+
+### Changed
+
+- The Capture Game View menu item now displays the default F12 shortcut
+
 ## [0.2.0] - 2026-08-19
 
 ### Added

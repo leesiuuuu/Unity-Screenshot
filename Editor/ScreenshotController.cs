@@ -22,7 +22,7 @@ namespace LeeSiwoo.UnityScreenshot.Editor
             Capture();
         }
 
-        [MenuItem(MenuRoot + "Capture Game View", priority = 1)]
+        [MenuItem(MenuRoot + "Capture Game View (F12)", priority = 1)]
         private static void CaptureFromMenu()
         {
             Capture();
