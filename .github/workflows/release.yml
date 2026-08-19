@@ -1,0 +1,90 @@
+name: Release Unity Package
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate release version
+        shell: bash
+        run: |
+          package_version="$(node -p "require('./Packages/com.leesiuuuu.unity-screenshot/package.json').version")"
+
+          if [[ "v${package_version}" != "${GITHUB_REF_NAME}" ]]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match package version ${package_version}."
+            exit 1
+          fi
+          echo "PACKAGE_FILE=Unity-Screenshot-${GITHUB_REF_NAME}.unitypackage" >> "${GITHUB_ENV}"
+
+      - name: Prepare Unity project layout
+        shell: bash
+        run: |
+          package_root="Packages/com.leesiuuuu.unity-screenshot"
+          asset_root="UnityPackageProject/Assets/UnityScreenshot"
+
+          mkdir -p "${asset_root}" dist
+          cp -R "${package_root}/Editor" "${asset_root}/Editor"
+          cp "${package_root}/Editor.meta" "${asset_root}/Editor.meta"
+          cp LICENSE "${asset_root}/LICENSE.txt"
+
+          cat > "UnityPackageProject/Assets/UnityScreenshot.meta" <<'EOF'
+          fileFormatVersion: 2
+          guid: bbc167855348465ba88354072da57fb8
+          folderAsset: yes
+          DefaultImporter:
+            externalObjects: {}
+            userData:
+            assetBundleName:
+            assetBundleVariant:
+          EOF
+
+          cat > "${asset_root}/LICENSE.txt.meta" <<'EOF'
+          fileFormatVersion: 2
+          guid: 67937d5e159c4bb7bc8dd8b5849646cc
+          TextScriptImporter:
+            externalObjects: {}
+            userData:
+            assetBundleName:
+            assetBundleVariant:
+          EOF
+
+          (
+            cd UnityPackageProject
+            {
+              echo "Assets/UnityScreenshot.meta"
+              find Assets/UnityScreenshot -name '*.meta' -print
+            } | sort > ../unitypackage-meta-list.txt
+          )
+
+      - name: Create unitypackage
+        uses: pCYSl5EDgo/create-unitypackage@b5c57408698b1fab8b3a84d4b67f767b8b7c0be9 # v1.2.3
+        with:
+          project-folder: UnityPackageProject
+          package-path: dist/${{ env.PACKAGE_FILE }}
+          include-files: unitypackage-meta-list.txt
+
+      - name: Create or update GitHub Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          package_path="dist/${PACKAGE_FILE}"
+
+          if gh release view "${GITHUB_REF_NAME}" > /dev/null 2>&1; then
+            gh release upload "${GITHUB_REF_NAME}" "${package_path}" --clobber
+          else
+            gh release create "${GITHUB_REF_NAME}" "${package_path}" \
+              --title "${GITHUB_REF_NAME}" \
+              --generate-notes
+          fi

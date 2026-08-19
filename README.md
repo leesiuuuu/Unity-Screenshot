@@ -19,12 +19,20 @@ Capture the Unity Game view with **F12**, just like taking a screenshot on Steam
 
 ## Installation
 
+### Git URL (recommended)
+
 In Unity, open **Window > Package Manager**, click the **+** button, and select
 **Add package from git URL...**. Enter:
 
 ```text
 https://github.com/leesiuuuu/Unity-Screenshot.git?path=/Packages/com.leesiuuuu.unity-screenshot
 ```
+
+### Unity package
+
+Download the `.unitypackage` file from the
+[latest GitHub Release](https://github.com/leesiuuuu/Unity-Screenshot/releases/latest),
+then import it from **Assets > Import Package > Custom Package...**.
 
 ## Usage
 

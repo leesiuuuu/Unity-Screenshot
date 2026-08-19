@@ -19,12 +19,20 @@ Steam에서 스크린샷을 찍듯이 **F12**를 눌러 Unity Game View를 캡�
 
 ## 설치
 
+### Git URL 설치(권장)
+
 Unity에서 **Window > Package Manager**를 열고 **+** 버튼을 누른 다음
 **Add package from git URL...**을 선택하세요. 아래 주소를 입력하면 됩니다.
 
 ```text
 https://github.com/leesiuuuu/Unity-Screenshot.git?path=/Packages/com.leesiuuuu.unity-screenshot
 ```
+
+### Unity package 설치
+
+[최신 GitHub Release](https://github.com/leesiuuuu/Unity-Screenshot/releases/latest)에서
+`.unitypackage` 파일을 다운로드한 다음, Unity의
+**Assets > Import Package > Custom Package...**에서 불러오세요.
 
 ## 사용 방법
 
