@@ -6,7 +6,7 @@ Capture the Unity Game view with **F12**, just like taking a screenshot on Steam
 
 ## Features
 
-- Capture the current Game view as a PNG while in Play Mode
+- Capture the current Game view as a PNG in Edit Mode or Play Mode
 - Use F12 by default
 - Rebind the shortcut with Unity's Shortcut Manager
 - Choose the screenshot output folder
@@ -28,10 +28,9 @@ https://github.com/leesiuuuu/Unity-Screenshot.git
 
 ## Usage
 
-1. Enter Play Mode.
-2. Focus any Unity editor window.
-3. Press **F12**.
-4. Find the PNG in the `Screenshots` folder at the root of your Unity project.
+1. Focus any Unity editor window.
+2. Press **F12** in Edit Mode or Play Mode.
+3. Find the PNG in the `Screenshots` folder at the root of your Unity project.
 
 You can also capture or open the output folder from **Tools > Unity Screenshot**.
 
@@ -46,7 +45,8 @@ To change F12, open **Edit > Shortcuts**, search for
 
 - Screenshots use the current Game view resolution.
 - The tool captures the final rendered Game view, including UI and post-processing.
-- Capture is available only while the editor is in Play Mode.
+- The Game view is focused automatically before capture.
+- Capture is available in both Edit Mode and Play Mode.
 
 ## License
 

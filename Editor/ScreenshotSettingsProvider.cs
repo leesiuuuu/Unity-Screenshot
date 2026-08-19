@@ -31,7 +31,7 @@ namespace LeeSiwoo.UnityScreenshot.Editor
 
             EditorGUILayout.LabelField("Capture", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox(
-                "Enter Play Mode and use the shortcut to capture the current Game view as a PNG.",
+                "Use the shortcut in Edit Mode or Play Mode to capture the current Game view as a PNG.",
                 MessageType.Info);
 
             ShortcutBinding binding = ShortcutManager.instance.GetShortcutBinding(ScreenshotController.ShortcutId);

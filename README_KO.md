@@ -6,7 +6,7 @@ Steam에서 스크린샷을 찍듯이 **F12**를 눌러 Unity Game View를 캡�
 
 ## 기능
 
-- Play Mode에서 현재 Game View를 PNG로 캡처
+- Edit Mode와 Play Mode에서 현재 Game View를 PNG로 캡처
 - 기본 단축키 F12 제공
 - Unity Shortcut Manager를 통한 단축키 변경
 - 스크린샷 저장 폴더 설정
@@ -28,10 +28,9 @@ https://github.com/leesiuuuu/Unity-Screenshot.git
 
 ## 사용 방법
 
-1. Play Mode를 시작합니다.
-2. Unity 에디터 창을 포커스합니다.
-3. **F12**를 누릅니다.
-4. Unity 프로젝트 루트의 `Screenshots` 폴더에서 PNG 파일을 확인합니다.
+1. Unity 에디터 창을 포커스합니다.
+2. Edit Mode 또는 Play Mode에서 **F12**를 누릅니다.
+3. Unity 프로젝트 루트의 `Screenshots` 폴더에서 PNG 파일을 확인합니다.
 
 **Tools > Unity Screenshot** 메뉴에서도 화면을 캡처하거나 저장 폴더를 열 수 있습니다.
 
@@ -46,9 +45,9 @@ F12 단축키를 변경하려면 **Edit > Shortcuts**를 열고
 
 - 현재 Game View 해상도로 스크린샷이 저장됩니다.
 - UI와 포스트 프로세싱을 포함한 최종 Game View 화면을 캡처합니다.
-- Unity 에디터가 Play Mode일 때만 캡처할 수 있습니다.
+- 캡처하기 전에 Game View가 자동으로 포커스됩니다.
+- Edit Mode와 Play Mode에서 모두 캡처할 수 있습니다.
 
 ## 라이선스
 
 [MIT](LICENSE.md)
-
