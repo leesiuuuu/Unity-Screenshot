@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -21,11 +22,27 @@ jobs:
         run: |
           package_version="$(node -p "require('./Packages/com.leesiuuuu.unity-screenshot/package.json').version")"
 
-          if [[ "v${package_version}" != "${GITHUB_REF_NAME}" ]]; then
-            echo "Tag ${GITHUB_REF_NAME} does not match package version ${package_version}."
+          release_tag="${GITHUB_REF_NAME}"
+
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            release_tag="v${package_version}"
+          fi
+
+          if [[ "v${package_version}" != "${release_tag}" ]]; then
+            echo "Tag ${release_tag} does not match package version ${package_version}."
             exit 1
           fi
-          echo "PACKAGE_FILE=Unity-Screenshot-${GITHUB_REF_NAME}.unitypackage" >> "${GITHUB_ENV}"
+
+          echo "PACKAGE_VERSION=${package_version}" >> "${GITHUB_ENV}"
+          echo "RELEASE_TAG=${release_tag}" >> "${GITHUB_ENV}"
+          echo "PACKAGE_FILE=Unity-Screenshot-${release_tag}.unitypackage" >> "${GITHUB_ENV}"
+
+      - name: Extract release notes from changelog
+        run: >-
+          node .github/scripts/extract-release-notes.mjs
+          Packages/com.leesiuuuu.unity-screenshot/CHANGELOG.md
+          "${PACKAGE_VERSION}"
+          release-notes.md
 
       - name: Prepare Unity project layout
         shell: bash
@@ -81,10 +98,13 @@ jobs:
         run: |
           package_path="dist/${PACKAGE_FILE}"
 
-          if gh release view "${GITHUB_REF_NAME}" > /dev/null 2>&1; then
-            gh release upload "${GITHUB_REF_NAME}" "${package_path}" --clobber
+          if gh release view "${RELEASE_TAG}" > /dev/null 2>&1; then
+            gh release edit "${RELEASE_TAG}" \
+              --title "${RELEASE_TAG}" \
+              --notes-file release-notes.md
+            gh release upload "${RELEASE_TAG}" "${package_path}" --clobber
           else
-            gh release create "${GITHUB_REF_NAME}" "${package_path}" \
-              --title "${GITHUB_REF_NAME}" \
-              --generate-notes
+            gh release create "${RELEASE_TAG}" "${package_path}" \
+              --title "${RELEASE_TAG}" \
+              --notes-file release-notes.md
           fi
