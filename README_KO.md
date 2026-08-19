@@ -23,7 +23,7 @@ Unity에서 **Window > Package Manager**를 열고 **+** 버튼을 누른 다음
 **Add package from git URL...**을 선택하세요. 아래 주소를 입력하면 됩니다.
 
 ```text
-https://github.com/leesiuuuu/Unity-Screenshot.git
+https://github.com/leesiuuuu/Unity-Screenshot.git?path=/Packages/com.leesiuuuu.unity-screenshot
 ```
 
 ## 사용 방법
@@ -50,4 +50,4 @@ F12 단축키를 변경하려면 **Edit > Shortcuts**를 열고
 
 ## 라이선스
 
-[MIT](LICENSE.md)
+[MIT](LICENSE)

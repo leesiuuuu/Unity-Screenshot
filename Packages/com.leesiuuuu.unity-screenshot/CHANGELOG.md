@@ -2,6 +2,13 @@
 
 All notable changes to this package will be documented in this file.
 
+## [0.2.2] - 2026-08-19
+
+### Changed
+
+- Moved the UPM package to `Packages/com.leesiuuuu.unity-screenshot`
+- Updated the Git installation URL to use the package path
+
 ## [0.2.1] - 2026-08-19
 
 ### Changed

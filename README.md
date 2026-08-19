@@ -23,7 +23,7 @@ In Unity, open **Window > Package Manager**, click the **+** button, and select
 **Add package from git URL...**. Enter:
 
 ```text
-https://github.com/leesiuuuu/Unity-Screenshot.git
+https://github.com/leesiuuuu/Unity-Screenshot.git?path=/Packages/com.leesiuuuu.unity-screenshot
 ```
 
 ## Usage
@@ -50,4 +50,4 @@ To change F12, open **Edit > Shortcuts**, search for
 
 ## License
 
-[MIT](LICENSE.md)
+[MIT](LICENSE)
